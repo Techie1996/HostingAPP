@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
     "babel-preset-react-app": "^10.0.0",
     "concurrently": "^8.2.2"
   }

@@ -13,6 +13,33 @@ const TaskCreation = ({ onTaskCreated }) => {
     dueDate: '',
   });
 
+//----------------///
+
+  // Inside TaskCreation component
+const createTask = async (taskData) => {
+  try {
+    // Make a POST request to the server
+    const response = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(taskData), // Ensure taskData is correctly formatted
+    });
+
+    // Parse the response JSON
+    const createdTask = await response.json();
+    console.log('Task created:', createdTask);
+
+    // Perform additional logic if needed
+  } catch (error) {
+    console.error('Error creating task:', error.message);
+    // Handle error as needed
+  }
+};
+
+//----------------///
+
   // Dummy data for demonstration
   //const [tasks, setTasks] = useState([
   //  { id: 1, title: 'Task 1', description: 'Description 1', dueDate: '2023-12-01', status: 'Completed' },
@@ -29,8 +56,8 @@ const TaskCreation = ({ onTaskCreated }) => {
   };
 
   // Function to handle task creation
-const handleCreateTask = () => {
-  // AddIng validation logic
+ const handleCreateTask = async () => {
+  // Adding validation logic
   if (newTask.title.trim() === '' || newTask.description.trim() === '') {
     // Shows an error toast notification for empty title or description
     toast.error('Title and description cannot be empty!', {
@@ -41,7 +68,7 @@ const handleCreateTask = () => {
   }
 
   if (!newTask.dueDate) {
-    // Shows an error toast notification for missing due date
+    // Shows an error toast notification for a missing due date
     toast.error('Please provide a due date for the task!', {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 2000,
@@ -50,11 +77,11 @@ const handleCreateTask = () => {
   }
 
   const currentDate = new Date();
-  const dueDate = new Date(newTask.dueDate + 'T23:59:59'); 
+  const dueDate = new Date(newTask.dueDate + 'T23:59:59');
   // Setting the time to the end of the day
 
   if (dueDate < currentDate) {
-    // Shows an error toast notification for past due date
+    // Shows an error toast notification for a past due date
     toast.error('Due date cannot be in the past!', {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 2000,
@@ -62,32 +89,50 @@ const handleCreateTask = () => {
     return;
   }
 
-  // Simulates task creation
-  console.log('Creating task:', newTask);
+  try {
+    // Make a POST request to your server endpoint
+    const response = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask),
+    });
 
-  // Calls the function from App to update tasks list
-  const newTaskWithId = {
-    id: uuidv4(),
-    ...newTask,
-    status: 'Not Completed',
-  };
-  onTaskCreated(newTaskWithId);
+    if (!response.ok) {
+      throw new Error('Error creating task');
+    }
 
-  // Resets form
-  setNewTask({
-    title: '',
-    description: '',
-    dueDate: '',
-  });
+    // Assuming your server responds with the created task
+    const createdTask = await response.json();
 
-  // Showss a success toast notification
-  toast.success('Task created successfully!', {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000,
-  });
+    // Calls the function from App to update tasks list
+    onTaskCreated(createdTask);
 
-  // Navigates to Task Listing after creating the task
-  navigate('/');
+    // Resets form
+    setNewTask({
+      title: '',
+      description: '',
+      dueDate: '',
+    });
+
+    // Show success toast notification
+    toast.success('Task created successfully!', {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000,
+    });
+
+    // Navigate to Task Listing after creating the task
+    navigate('/');
+  } catch (error) {
+    console.error('Error creating task:', error);
+
+    // Show an error toast notification
+    toast.error('Error creating task. Please try again.', {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000,
+    });
+  }
 };
 
 

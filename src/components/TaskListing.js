@@ -5,7 +5,7 @@ const TaskListing = ({ tasks, setTasks, onNewTask, onTaskCreated, onTaskDeleted,
   console.log('Rendering TaskListing component');
 
   useEffect(() => {
-  fetch('https://helpful-mermaid-bd0430.netlify.app/tasks')
+  fetch('https://main--helpful-mermaid-bd0430.netlify.app/tasks')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -38,7 +38,7 @@ const TaskListing = ({ tasks, setTasks, onNewTask, onTaskCreated, onTaskDeleted,
 
 const handleDelete = async (taskId) => {
   try {
-    const response = await fetch(`https://helpful-mermaid-bd0430.netlify.app//tasks/${taskId}`, {
+    const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
       method: 'DELETE',
     });
 

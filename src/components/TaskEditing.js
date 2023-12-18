@@ -39,7 +39,7 @@ const TaskEditing = ({ onTaskUpdated, tasks }) => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`https://main--helpful-mermaid-bd0430.netlify.app/tasks/${taskId}`, {
+      const response = await fetch(`https://main--helpful-mermaid-bd0430.netlify.app/${taskId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const TaskEditing = ({ onTaskUpdated, tasks }) => {
   const navigate = useNavigate();
 
   // Initialize selectedTask with default values
-  const [selectedTask] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   // Initialize editedTask with default values
   const [editedTask, setEditedTask] = useState({

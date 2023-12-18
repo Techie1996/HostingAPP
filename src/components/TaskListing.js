@@ -5,7 +5,7 @@ const TaskListing = ({ tasks, setTasks, onNewTask, onTaskCreated, onTaskDeleted,
   console.log('Rendering TaskListing component');
 
   useEffect(() => {
-  fetch('https://helpful-mermaid-bd0430.netlify.app/')
+  fetch('https://main--helpful-mermaid-bd0430.netlify.app/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

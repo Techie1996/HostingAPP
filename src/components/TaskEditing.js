@@ -8,6 +8,7 @@ const TaskEditing = ({ onTaskUpdated, tasks }) => {
   const navigate = useNavigate();
 
   // Initialize selectedTask with default values
+  // eslint-disable-next-line no-unused-vars
   const [selectedTask, setSelectedTask] = useState(null);
 
   // Initialize editedTask with default values

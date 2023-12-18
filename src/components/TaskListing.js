@@ -38,7 +38,7 @@ const TaskListing = ({ tasks, setTasks, onNewTask, onTaskCreated, onTaskDeleted,
 
 const handleDelete = async (taskId) => {
   try {
-    const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+    const response = await fetch(`https://helpful-mermaid-bd0430.netlify.app//tasks/${taskId}`, {
       method: 'DELETE',
     });
 

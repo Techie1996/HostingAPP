@@ -31,6 +31,10 @@ app.get('/tasks', async (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 app.post('/tasks', async (req, res) => {
   try {
     const newTask = new Task(req.body);

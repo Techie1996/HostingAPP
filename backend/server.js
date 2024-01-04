@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path'); // Add this line to import the path module
 const Task = require('./models/Task');
 
 const app = express();

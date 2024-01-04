@@ -17,7 +17,9 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error.message);
   });
-
+app.get('/', (req, res) => {
+  res.send('Welcome to the Task Management App!');
+});
 // API endpoints
 app.get('/tasks', async (req, res) => {
   try {
